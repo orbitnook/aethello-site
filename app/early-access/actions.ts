@@ -16,7 +16,12 @@ export async function requestEarlyAccess(_previousState: EarlyAccessState, formD
 
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const publishableKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
-  if (!url || !publishableKey) return failure(values);
+  if (!url || !publishableKey) {
+    logDevelopmentFailure("missing_configuration", {
+      missing: [!url && "NEXT_PUBLIC_SUPABASE_URL", !publishableKey && "NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY"].filter(Boolean).join(", "),
+    });
+    return failure(values);
+  }
 
   try {
     const response = await fetch(`${url}/rest/v1/rpc/request_early_access`, {
@@ -31,13 +36,41 @@ export async function requestEarlyAccess(_previousState: EarlyAccessState, formD
       }),
       cache: "no-store",
     });
-    if (!response.ok) return failure(values);
+    if (!response.ok) {
+      const error = await readSafeSupabaseError(response);
+      logDevelopmentFailure("supabase_response", { status: response.status, ...error });
+      return failure(values);
+    }
     const result: unknown = await response.json();
-    return result === "created" || result === "duplicate" ? { status: "success", values } : failure(values);
-  } catch {
+    if (result === "created" || result === "duplicate") return { status: "success", values };
+    logDevelopmentFailure("unexpected_result", { result: safeText(result) });
+    return failure(values);
+  } catch (error) {
+    logDevelopmentFailure("network_error", {
+      error: error instanceof Error ? error.name : "UnknownError",
+      message: error instanceof Error ? safeText(error.message) : undefined,
+    });
     return failure(values);
   }
 }
 
 function publicValues(values: EarlyAccessValues): EarlyAccessState["values"] { return { email: values.email, name: values.name, organisation: values.organisation, researchContext: values.researchContext, role: values.role }; }
 function failure(values: EarlyAccessState["values"]): EarlyAccessState { return { message: "We could not send your request. Your entries remain available, so please try again.", status: "error", values }; }
+
+async function readSafeSupabaseError(response: Response): Promise<{ code?: string; message?: string }> {
+  try {
+    const payload: unknown = await response.json();
+    if (!payload || typeof payload !== "object") return {};
+    const error = payload as Record<string, unknown>;
+    return { code: safeText(error.code), message: safeText(error.message) };
+  } catch {
+    return {};
+  }
+}
+
+function safeText(value: unknown): string | undefined { return typeof value === "string" ? value.slice(0, 200) : undefined; }
+
+function logDevelopmentFailure(reason: string, details: Record<string, number | string | undefined>): void {
+  if (process.env.NODE_ENV !== "development") return;
+  console.error("[early-access] Submission failed", { reason, ...details });
+}
