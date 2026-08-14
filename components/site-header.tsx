@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Wordmark } from "@/components/wordmark";
 
 const navigation = [
+  { href: "/#authoring", label: "Create documents" },
   { href: "/#how-it-works", label: "How it works" },
   { href: "/#who-its-for", label: "Who it's for" },
 ];

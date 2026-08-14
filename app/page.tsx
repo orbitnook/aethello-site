@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { HeroComposition } from "@/components/hero-composition";
+import { NativeAuthoringComposition } from "@/components/native-authoring-composition";
 import { ConnectionLabel, DocumentCard, FindingCard, GuidanceDiff, ReviewerPoint, VersionBadge } from "@/components/marketing-ui";
 
 const audiences = [
@@ -18,7 +19,7 @@ export default function HomePage() {
           <div className="marketing-hero__copy">
             <p className="marketing-kicker">Research ethics and governance, connected</p>
             <h1 className="marketing-display">From first submission to final amendment, keep the evidence connected.</h1>
-            <p className="marketing-lede">Aethello helps research teams prepare ethics and governance submissions, review connected documents, respond to reviewer feedback and keep every change traceable to its source.</p>
+            <p className="marketing-lede">Create and coordinate research ethics submissions in one connected workspace. Build common submission documents, review connected evidence, respond to reviewer feedback and preserve every submitted version.</p>
             <div className="marketing-actions">
               <Link className="marketing-button focus-ring" href="/early-access">Request early access</Link>
               <Link className="marketing-button marketing-button--secondary focus-ring" href="#how-it-works">See how Aethello works</Link>
@@ -36,7 +37,7 @@ export default function HomePage() {
             <p>Important details can move across a submission while the connection between them remains difficult to see.</p>
           </div>
           <div className="story-grid">
-            <StoryCard number="01" title="Submission materials drift apart" copy="Application answers, participant information, consent materials and protocols are often updated separately, making inconsistencies difficult to spot." callout="Details diverge across the pack">
+            <StoryCard number="01" title="Submission materials drift apart" copy="Application answers, uploaded files and research documents are often updated separately, making inconsistencies difficult to spot." callout="Keep uploaded and Aethello-created materials connected">
               <div className="mock-stack"><DocumentCard label="Application" title="Participants: 40" /><DocumentCard label="Protocol" title="Participants: up to 50" tone="warning" /><DocumentCard label="Participant information sheet" title="Participant count not stated" /></div>
             </StoryCard>
             <StoryCard number="02" title="Reviewer feedback creates another round of coordination" copy="One reviewer point can affect several answers and documents, leaving researchers to work out what needs changing and where." callout="One request, several affected materials">
@@ -50,21 +51,31 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="marketing-section authoring-section" id="authoring" aria-labelledby="authoring-heading">
+        <div className="page-shell">
+          <div className="authoring-section__intro">
+            <div><p className="marketing-kicker">Create in Aethello</p><h2 className="marketing-heading" id="authoring-heading">Create the documents where the work happens.</h2></div>
+            <div className="authoring-section__copy"><p>Aethello lets researchers create common ethics submission materials directly in the same workspace where they are reviewed and tracked. Start with a structured template or create your own document.</p><p>Adapt sections and questions to your study and institution, or add custom submission materials when the standard templates do not fit.</p></div>
+          </div>
+          <NativeAuthoringComposition />
+        </div>
+      </section>
+
       <section className="marketing-section workflow-section" id="how-it-works" aria-labelledby="workflow-heading">
         <div className="page-shell">
-          <div className="marketing-section__intro marketing-section__intro--wide"><p className="marketing-kicker">How Aethello works</p><h2 className="marketing-heading" id="workflow-heading">One workspace from preparation to amendment.</h2></div>
+          <div className="marketing-section__intro marketing-section__intro--wide"><p className="marketing-kicker">Create · Review · Submit · Respond</p><h2 className="marketing-heading" id="workflow-heading">One workspace from first draft to reviewer response.</h2></div>
           <div className="workflow-cards">
-            <WorkflowCard number="01" title="Prepare with evidence" copy="Draft application responses alongside the exact documents and passages that support them.">
-              <div className="workflow-question"><span>Application question</span><p>How will participants be able to withdraw?</p></div><DocumentCard label="Researcher-authored answer" title="Participants may withdraw until their data has been anonymised." detail="Draft · Human authored" tone="accent" /><ConnectionLabel>Evidence matching this draft</ConnectionLabel><DocumentCard label="Linked source passage" title="Participants can withdraw before anonymisation." detail="Participant information sheet · Page 3" />
+            <WorkflowCard number="01 · Create" title="Create, then keep materials connected" copy="Use uploaded files alongside documents created in Aethello. Both stay connected to the same evidence, findings, version history and submission rounds as drafts develop.">
+              <div className="workflow-create-list"><DocumentCard label="Created in Aethello" title="Participant Information Sheet" detail="Draft · Structured sections" tone="accent" /><DocumentCard label="Uploaded file" title="Research Protocol" detail="Current version" /><DocumentCard label="Application material" title="Application responses" detail="Connected evidence and findings" /></div>
             </WorkflowCard>
-            <WorkflowCard number="02" title="Review the submission pack" copy="Surface missing, conflicting or unclear information across connected documents before submission." reverse>
+            <WorkflowCard number="02 · Review" title="Review connected materials" copy="Compare the details carried across documents and application responses, with source-backed findings that help researchers identify inconsistencies." reverse>
               <FindingCard title="Participant count appears inconsistent"><div className="comparison-pair"><DocumentCard label="Application" title="40 participants" /><DocumentCard label="Protocol" title="Up to 50 participants" tone="warning" /></div></FindingCard>
             </WorkflowCard>
-            <WorkflowCard number="03" title="Respond without rebuilding the reviewer letter" copy="Turn reviewer feedback into coordinated amendments across application answers and documents.">
-              <ReviewerPoint>Clarify how participant withdrawal will work.</ReviewerPoint><div className="response-flow" aria-label="Reviewer response workflow"><span>Affected answer</span><span aria-hidden="true">→</span><span>Affected document</span><span aria-hidden="true">→</span><span>Revised versions</span></div><div className="mock-confirm"><span aria-hidden="true">✓</span><div><p>Response ready</p><small>Confirmed by researcher</small></div></div>
+            <WorkflowCard number="03 · Submit" title="Prepare the submission" copy="Choose the materials being submitted, freeze their exact document and application versions, and download a submission pack for the institution’s existing portal.">
+              <div className="submission-pack"><div className="submission-pack__top"><div><p className="mock-label">Submission round 1</p><strong>3 selected materials</strong></div><VersionBadge>Ready to freeze</VersionBadge></div><div className="mock-list"><span>Application responses <VersionBadge>Current</VersionBadge></span><span>Participant Information Sheet <VersionBadge>Draft 4</VersionBadge></span><span>Consent Form <VersionBadge>Draft 3</VersionBadge></span></div><div className="submission-pack__footer"><span>Exact versions preserved</span><span className="mock-action">Download pack</span></div></div>
             </WorkflowCard>
-            <WorkflowCard number="04" title="Stay aligned as requirements change" copy="Compare approved guidance versions and review which active research materials may be affected." reverse>
-              <GuidanceDiff /><ConnectionLabel>Potential impact</ConnectionLabel><div className="mock-list"><span>Data-retention answer</span><span>Protocol</span></div><div className="mock-action">Review impact</div>
+            <WorkflowCard number="04 · Respond" title="Respond to reviewer feedback" copy="Record reviewer requests, coordinate changes across affected materials and preserve the history of each response." reverse>
+              <ReviewerPoint>Clarify how participant withdrawal will work.</ReviewerPoint><div className="response-flow" aria-label="Reviewer response workflow"><span>Affected answer</span><span aria-hidden="true">→</span><span>Affected document</span><span aria-hidden="true">→</span><span>Revised versions</span></div><div className="mock-confirm"><span aria-hidden="true">✓</span><div><p>Response ready</p><small>Confirmed by researcher</small></div></div>
             </WorkflowCard>
           </div>
         </div>

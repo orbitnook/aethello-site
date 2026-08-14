@@ -10,13 +10,14 @@ const footer = read("components/site-footer.tsx");
 describe("public marketing site", () => {
   it("uses the required hero and conversion copy", () => {
     expect(home).toContain("From first submission to final amendment, keep the evidence connected.");
-    expect(home).toContain("Aethello helps research teams prepare ethics and governance submissions, review connected documents, respond to reviewer feedback and keep every change traceable to its source.");
+    expect(home).toContain("Create and coordinate research ethics submissions in one connected workspace.");
     expect(home).toContain("See how Aethello works");
     expect(home).toContain('href="/early-access"');
   });
 
   it("has the intended public navigation without product links", () => {
     const navigation = `${header}\n${footer}`;
+    expect(navigation).toContain("Create documents");
     expect(navigation).toContain("How it works");
     expect(navigation).toContain("Who it&apos;s for");
     expect(navigation).toContain("Request early access");
@@ -27,5 +28,13 @@ describe("public marketing site", () => {
     expect(home).toContain("Source-backed by design.");
     expect(home).toContain("does not treat generated text as the source of truth");
     expect(home).toContain("Human confirmation");
+  });
+
+  it("presents document creation and the researcher-controlled workflow", () => {
+    expect(home).toContain("Create the documents where the work happens.");
+    expect(home).toContain("Create in Aethello");
+    expect(home).toContain("Adapt sections and questions to your study and institution");
+    for (const step of ["Create, then keep materials connected", "Review connected materials", "Prepare the submission", "Respond to reviewer feedback"]) expect(home).toContain(step);
+    expect(home).toContain("institution’s existing portal");
   });
 });
