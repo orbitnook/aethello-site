@@ -15,7 +15,7 @@ p, h1, h2, h3 { margin: 0; }
 .reading-shell { width: min(760px, calc(100% - 40px)); margin-inline: auto; }
 .focus-ring:focus-visible, .field-control:focus-visible { outline: 3px solid color-mix(in srgb, var(--accent) 42%, transparent); outline-offset: 3px; }
 .wordmark { display: inline-flex; align-items: center; gap: .65rem; border-radius: .4rem; }
-.wordmark > span { display: grid; width: 2rem; height: 2rem; place-items: center; border-radius: .45rem; background: var(--accent); color: white; font-size: .85rem; font-weight: 700; }
+.wordmark > img { width: 2rem; height: 2rem; }
 .wordmark strong { font-size: 1.18rem; }
 .marketing-display, .marketing-heading, .story-card h3, .workflow-card__copy h3, .early-form-success h2 { font-family: var(--heading-font); }
 .marketing-display, .marketing-heading { text-wrap: balance; }
