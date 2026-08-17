@@ -37,6 +37,16 @@ describe("public marketing site", () => {
     for (const step of ["Keep the submission connected.", "Catch inconsistencies before they become reviewer comments.", "Know exactly what was submitted.", "Respond without losing the thread."]) expect(home).toContain(step);
   });
 
+  it("identifies the intended research audiences", () => {
+    expect(home).toContain("Who is Aethello for?");
+    for (const audience of [
+      "Academic research teams",
+      "Health and social care research teams",
+      "Clinical and regulated research teams",
+      "Research consultancies and support functions",
+    ]) expect(home).toContain(audience);
+  });
+
   it("includes the practical FAQ without expanding privacy claims", () => {
     for (const question of [
       "What does Aethello do?",

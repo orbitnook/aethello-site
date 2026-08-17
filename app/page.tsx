@@ -13,6 +13,25 @@ const shots = {
   review: { src: "/product/review-amendments.png", width: 1798, height: 774 },
 };
 
+const audiences = [
+  {
+    title: "Academic research teams",
+    description: "Preparing and coordinating university ethics submissions and supporting materials.",
+  },
+  {
+    title: "Health and social care research teams",
+    description: "Managing research governance, supporting documents and connected application evidence.",
+  },
+  {
+    title: "Clinical and regulated research teams",
+    description: "Coordinating more complex submissions where consistency, traceability and review matter.",
+  },
+  {
+    title: "Research consultancies and support functions",
+    description: "Supporting researchers across multiple studies, documents and submission workflows.",
+  },
+];
+
 export default function HomePage() {
   return (
     <>
@@ -29,11 +48,14 @@ export default function HomePage() {
           </Reveal>
 
           <Reveal className="hero-scene" delay={100}>
-            <div className="hero-scene__line hero-scene__line--one" aria-hidden="true" />
-            <div className="hero-scene__line hero-scene__line--two" aria-hidden="true" />
-            <ProductCrop {...shots.pack} alt="Aethello submission pack with active documents and suggested contents" aspectRatio="1.82" className="hero-scene__pack" focusX={0} focusY={-1} mobileFocusX={0} mobileFocusY={-1} mobileScale={1.45} priority scale={1.1} />
-            <ProductCrop {...shots.application} alt="Aethello application question list, selected answer and linked supporting evidence" aspectRatio="1.72" className="hero-scene__application" focusX={0} focusY={-37} mobileFocusX={0} mobileFocusY={-38} mobileScale={1.2} priority scale={1.15} sizes="(max-width: 700px) 390px, 560px" />
-            <ProductCrop {...shots.finding} alt="Aethello inconsistency finding linked to two source documents" aspectRatio="2.72" className="hero-scene__finding" focusX={0} focusY={-1} mobileFocusX={0} mobileFocusY={-1} mobileScale={1.65} priority scale={1.18} sizes="(max-width: 700px) 440px, 680px" />
+            <div className="hero-scene__stack">
+              <div className="hero-scene__backdrop" aria-hidden="true" />
+              <div className="hero-scene__line hero-scene__line--one" aria-hidden="true" />
+              <div className="hero-scene__line hero-scene__line--two" aria-hidden="true" />
+              <ProductCrop {...shots.pack} alt="Aethello submission pack with active documents and suggested contents" aspectRatio="1.82" className="hero-scene__pack" focusX={0} focusY={-1} mobileFocusX={0} mobileFocusY={-1} mobileScale={1.65} priority scale={1.04} sizes="(max-width: 640px) calc(100vw - 56px), (max-width: 1120px) 760px, 690px" />
+              <ProductCrop {...shots.application} alt="Aethello application question list, selected answer and linked supporting evidence" aspectRatio="1.6" className="hero-scene__application" focusX={0} focusY={-35} mobileFocusX={0} mobileFocusY={-35} mobileScale={1.08} priority scale={1.08} sizes="(max-width: 1120px) 430px, 360px" />
+              <ProductCrop {...shots.finding} alt="Aethello inconsistency finding linked to two source documents" aspectRatio="2.55" className="hero-scene__finding" focusX={0} focusY={0} mobileFocusX={0} mobileFocusY={0} mobileScale={1.18} priority scale={1.06} sizes="(max-width: 1120px) 560px, 460px" />
+            </div>
             <p className="hero-scene__caption"><span aria-hidden="true" /> Documents, evidence and findings stay connected</p>
           </Reveal>
         </div>
@@ -52,7 +74,9 @@ export default function HomePage() {
             </Reveal>
           </div>
           <Reveal className="create-product" delay={120}>
-            <ProductCrop {...shots.create} alt="Upload an existing document or create a structured document in Aethello" aspectRatio="2.28" focusX={0} focusY={-15} mobileFocusX={-3} mobileFocusY={-13} mobileScale={1.48} scale={1.06} />
+            <div className="create-stage">
+              <ProductCrop {...shots.create} alt="Upload an existing document or create a structured document in Aethello" aspectRatio="2.16" className="create-stage__main" focusX={0} focusY={-12} mobileFocusX={-2} mobileFocusY={-11} mobileScale={1.2} scale={1.03} sizes="(max-width: 640px) calc(100vw - 56px), (max-width: 1120px) calc(100vw - 112px), 1080px" />
+            </div>
             <div className="create-product__key" aria-hidden="true"><span>Bring in existing material</span><i /><span>Create a structured document</span></div>
           </Reveal>
         </div>
@@ -81,7 +105,7 @@ export default function HomePage() {
                 <ProductCrop {...shots.application} alt="Application question list beside a selected question, researcher-authored answer and linked supporting evidence" aspectRatio="1.75" className="application-proof" focusX={0} focusY={-1} mobileFocusX={0} mobileFocusY={-1} mobileScale={1.05} scale={1} />
               </Reveal>
             </div>
-            <p className="chapter-caveat">Nothing is confirmed automatically. Researchers review possible facts and decide which evidence supports an answer    .</p>
+            <p className="chapter-caveat">Nothing is confirmed automatically. Researchers review possible facts and decide which evidence supports an answer.</p>
           </div>
         </div>
 
@@ -101,8 +125,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="v2-section submit-respond-chapter" id="submit-respond" aria-labelledby="history-heading">
-        <div className="page-shell">
+      <section className="submit-respond-chapter" id="submit-respond" aria-labelledby="history-heading">
+        <div className="v2-section submission-history-section">
+          <div className="page-shell">
           <div className="history-layout">
             <Reveal className="history-layout__copy">
               <p className="marketing-kicker">Submission history</p>
@@ -118,7 +143,11 @@ export default function HomePage() {
 
           <div className="workflow-transition" aria-hidden="true"><span>Submitted version preserved</span><i /><span>Reviewer feedback coordinated</span></div>
 
-          <div className="respond-layout" id="respond" aria-labelledby="respond-heading">
+          </div>
+        </div>
+
+        <div className="respond-band" id="respond" aria-labelledby="respond-heading">
+          <div className="page-shell respond-layout">
             <Reveal className="respond-layout__copy">
               <p className="marketing-kicker">After submission</p>
               <h2 className="marketing-heading" id="respond-heading">Respond without losing the thread.</h2>
@@ -129,6 +158,25 @@ export default function HomePage() {
               <ProductCrop {...shots.review} alt="Round 2 workflow for reviewer feedback, affected items, amendments and responses" aspectRatio="1.72" focusX={0} focusY={-3} mobileFocusX={0} mobileFocusY={-2} mobileScale={2.05} scale={1.32} />
             </Reveal>
           </div>
+        </div>
+      </section>
+
+      <section className="audience-section" aria-labelledby="audience-heading">
+        <div className="page-shell audience-section__inner">
+          <Reveal className="audience-section__intro">
+            <p className="marketing-kicker">Who it is for</p>
+            <h2 className="marketing-heading" id="audience-heading">Who is Aethello for?</h2>
+            <p>For teams preparing and coordinating research ethics and governance submissions across connected materials.</p>
+          </Reveal>
+          <Reveal className="audience-grid" delay={70}>
+            {audiences.map((audience, index) => (
+              <article key={audience.title}>
+                <span>0{index + 1}</span>
+                <h3>{audience.title}</h3>
+                <p>{audience.description}</p>
+              </article>
+            ))}
+          </Reveal>
         </div>
       </section>
 
