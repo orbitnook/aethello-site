@@ -20,7 +20,7 @@ export default function HomePage() {
         <div className="page-shell v2-hero__inner">
           <Reveal className="v2-hero__copy">
             <p className="marketing-kicker">Early access</p>
-            <h1 className="marketing-display">From first submission to final amendment, keep the evidence connected.</h1>
+            <h1 className="marketing-display">Research submissions, kept connected.</h1>
             <p className="marketing-lede">Aethello helps research teams organise submission materials, identify inconsistencies, prepare application responses and manage reviewer-requested changes across connected documents.</p>
             <div className="marketing-actions">
               <Link className="marketing-button focus-ring" href="/early-access">Request early access</Link>
