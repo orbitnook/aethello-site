@@ -12,11 +12,11 @@ export const metadata: Metadata = {
     template: "%s | Aethello",
   },
   description:
-    "Create and coordinate research ethics submission materials, review connected evidence and preserve every submitted version in Aethello.",
+    "A source-backed workspace for preparing, reviewing and coordinating research ethics and governance submissions.",
   openGraph: {
     title: "Aethello | Research ethics and governance, connected",
     description:
-      "Create and coordinate research ethics submission materials, review connected evidence and preserve every submitted version in Aethello.",
+      "A source-backed workspace for preparing, reviewing and coordinating research ethics and governance submissions.",
     type: "website",
   },
 };
